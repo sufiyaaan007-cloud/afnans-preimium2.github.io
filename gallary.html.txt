@@ -1,0 +1,30 @@
+<main class="pt-32 pb-24 max-w-7xl mx-auto px-6" x-data="{ filter: 'all', lightboxImg: null }">
+        <div class="text-center mb-16">
+            <h1 class="text-5xl font-serif text-dark mb-4">Our Portfolio</h1>
+            <div class="flex justify-center gap-6 mt-8">
+                <button @click="filter = 'all'" :class="filter === 'all' ? 'text-gold-500 border-b border-gold-500' : 'text-gray-500'" class="uppercase tracking-widest text-sm pb-1">All</button>
+                <button @click="filter = 'hair'" :class="filter === 'hair' ? 'text-gold-500 border-b border-gold-500' : 'text-gray-500'" class="uppercase tracking-widest text-sm pb-1">Hair</button>
+                <button @click="filter = 'nails'" :class="filter === 'nails' ? 'text-gold-500 border-b border-gold-500' : 'text-gray-500'" class="uppercase tracking-widest text-sm pb-1">Nails & Spa</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div x-show="filter === 'all' || filter === 'hair'" class="relative overflow-hidden group cursor-pointer aspect-square" @click="lightboxImg = 'https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?auto=format&fit=crop&q=80'">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?auto=format&fit=crop&q=80" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-dark/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="text-white uppercase tracking-widest text-sm">View</span>
+                </div>
+            </div>
+            <div x-show="filter === 'all' || filter === 'nails'" class="relative overflow-hidden group cursor-pointer aspect-square" @click="lightboxImg = 'https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80'">
+                <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-dark/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="text-white uppercase tracking-widest text-sm">View</span>
+                </div>
+            </div>
+            </div>
+
+        <div x-show="lightboxImg" class="fixed inset-0 z-[100] bg-dark/95 flex items-center justify-center p-4" x-transition @keydown.escape.window="lightboxImg = null">
+            <button @click="lightboxImg = null" class="absolute top-6 right-6 text-white text-4xl">&times;</button>
+            <img :src="lightboxImg" class="max-w-full max-h-[90vh] object-contain" @click.away="lightboxImg = null">
+        </div>
+    </main>
